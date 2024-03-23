@@ -16,11 +16,32 @@ knowledge_base = {
         "subtract": lambda x, y: x - y,  # Similar functions for other operations
         "multiply": lambda x, y: x * y,   # Add more operations here
         "divide": lambda x, y: x / y,    # (Be careful about division by zero!) 
-    }# ... (Add more operations as needed)
-
-    
+    },  # Add a comma here
+    "small_talk": [
+        "I'm doing well, thanks for asking!",
+        "Blue. It's a calm color.",
+        "Why did the scarecrow love his job? Because he was outstanding in his field!"  # Example joke
+    ],
+    "general_questions": [
+        "Paris.", "Leonardo da Vinci.",
+         "That's a tough one! Philosophers have debated that for centuries.",
+         "Berlin, the capital of Germany, is known for its rich history and culture."
+    ],
+    "about_maayavi": [
+    "I'm here to help with calculations and answer your questions!",
+    "My creators made me to be a learning AI assistant."  # Add more responses here 
+    ]
 
     }
+
+def get(key, default=None):
+    data = {
+        "greetings": [ "Hello there!", "Hi, how can I help you?", "Good day! What's on your mind?",],  # Your existing greetings
+        "small_talk": ["I'm doing well, thanks for asking!", "Blue. It's a calm color.",],
+        "general_questions": ["Paris.", "Leonardo da Vinci.",], 
+        "about_maayavi": ["I'm here to help with calculations and answer your questions!",]
+    }
+    return data.get(key, default)
 
 
 def convert_to_postfix(expression):

@@ -3,6 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize # To add variety to responses
 import knowledge_base 
 import re
+import country
 
 def greet_user():
     greetings = knowledge_base.get("greetings", ["Hello!"])  # Fetch greetings from knowledge base
@@ -18,25 +19,65 @@ def greet_user():
 
 
 def handle_user_input(user_input):
-    print("Inside handle_user_input with input:", user_input)  # DEBUG LINE 
+   
     # Preprocess user input (lowercase, remove punctuation, etc.)
     processed_input = word_tokenize(user_input.lower())
 
-    # Identify keywords or patterns in the input
-    if any(word in processed_input for word in ["hello", "hi", "hey"]):
-        return random.choice(knowledge_base["greetings"])
-    elif any(word in processed_input for word in ["name", "call"]):
-        return knowledge_base["self_intro"]["what is your name"]
+    
+
+          # Default if no match found
+
+
+    # Favorite Color Question (Should be checked first)
+    if re.search(r'\b(favorite\s+color)\b', user_input.lower()):  
+        return random.choice(knowledge_base.get("small_talk"))
+
+    # Small Talk Patterns
+    if re.search(r'(how\s+are\s+you|how\'s\s+it\s+going)', user_input.lower()):
+        return random.choice(knowledge_base.get("small_talk"))
+    # ... (Add the other small talk regex patterns here) ...
+
+
+   
+ 
     # Detect Calculation Requests (Example)
     calc_keywords = ["calculate", "add", "subtract", "multiply", "divide", "solve"]  # Expanded keywords
     if any(word in word_tokenize(user_input.lower()) for word in calc_keywords):
-        print("Calculation request detected!")  # DEBUG LINE
+        
         calculation_result = knowledge_base.attempt_calculation(user_input)  # Call the function from knowledge_base 
         return calculation_result
         # Detect subtraction requests
     elif re.search(r'subtract\s+\d+\s+from\s+\d+', user_input):
         print("Subtraction request detected!")  # DEBUG LINE
         # Handle the subtraction request here
+
+    # Capital city 
+    if re.search(r'what\s+is\s+the\s+capital\s+of\s+(.*)', user_input.lower()):
+        country_name = re.search(r'what\s+is\s+the\s+capital\s+of\s+(.*)', user_input.lower()).group(1)  
+        capital_city = country.get_capital(country_name) 
+        if capital_city:
+            return "The capital of {} is {}.".format(country_name, capital_city)
+        else:
+            return "I don't have information about the capital of {}.".format(country_name)
+
+
+    # Questions about states
+    if re.search(r'what\s+are\s+the\s+states\s+in\s+(.*)', user_input.lower()):
+        country_name = re.search(r'what\s+are\s+the\s+states\s+in\s+(.*)', user_input.lower()).group(1) 
+        states = country.get_states(country_name)
+        if states:
+            return "The states in {} are: {}".format(country_name, ', '.join(states))
+        else:
+            return "I couldn't find states for {}".format(country_name)
+
+    
+
+
+    # General Knowledge Patterns
+    if re.search(r'what\s+is\s+the\s+(.*)', user_input.lower()):  
+        return random.choice(knowledge_base.get("general_questions")) 
+    # ... (Add more general knowledge regex patterns here) ...
+
     else:
         return "I'm still learning, but I don't quite understand that yet."
 
