@@ -52,8 +52,8 @@ def handle_user_input(user_input):
         # Handle the subtraction request here
 
     # Capital city 
-    if re.search(r'what\s+is\s+the\s+capital\s+of\s+(.*)', user_input.lower()):
-        country_name = re.search(r'what\s+is\s+the\s+capital\s+of\s+(.*)', user_input.lower()).group(1)  
+    if re.search(r'capital\s+of\s+(.*)', user_input.lower()):
+        country_name = re.search(r'capital\s+of\s+(.*)', user_input.lower()).group(1)  
         capital_city = country.get_capital(country_name) 
         if capital_city:
             return "The capital of {} is {}.".format(country_name, capital_city)
@@ -61,20 +61,10 @@ def handle_user_input(user_input):
             return "I don't have information about the capital of {}.".format(country_name)
 
 
-    # Questions about states
-    if re.search(r'what\s+are\s+the\s+states\s+in\s+(.*)', user_input.lower()):
-        country_name = re.search(r'what\s+are\s+the\s+states\s+in\s+(.*)', user_input.lower()).group(1) 
-        states = country.get_states(country_name)
-        if states:
-            return "The states in {} are: {}".format(country_name, ', '.join(states))
-        else:
-            return "I couldn't find states for {}".format(country_name)
-
-    
 
 
     # General Knowledge Patterns
-    if re.search(r'what\s+is\s+the\s+(.*)', user_input.lower()):  
+    if re.search(r'what\s+the\s+(.*)', user_input.lower()):  
         return random.choice(knowledge_base.get("general_questions")) 
     # ... (Add more general knowledge regex patterns here) ...
 
