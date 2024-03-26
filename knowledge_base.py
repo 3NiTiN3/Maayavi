@@ -19,11 +19,9 @@ knowledge_base = {
     },  # Add a comma here
     "small_talk": [
         "I'm doing well, thanks for asking!",
-        "Blue. It's a calm color.",
         "Why did the scarecrow love his job? Because he was outstanding in his field!"  # Example joke
     ],
     "general_questions": [
-        "Paris.", "Leonardo da Vinci.",
          "That's a tough one! Philosophers have debated that for centuries.",
          "Berlin, the capital of Germany, is known for its rich history and culture."
     ],
@@ -37,8 +35,7 @@ knowledge_base = {
 def get(key, default=None):
     data = {
         "greetings": [ "Hello there!", "Hi, how can I help you?", "Good day! What's on your mind?",],  # Your existing greetings
-        "small_talk": ["I'm doing well, thanks for asking!", "Blue. It's a calm color.",],
-        "general_questions": ["Paris.", "Leonardo da Vinci.",], 
+        "small_talk": ["I'm doing well, thanks for asking!", "I am good, thank you for asking. ",],
         "about_maayavi": ["I'm here to help with calculations and answer your questions!",]
     }
     return data.get(key, default)
