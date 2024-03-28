@@ -1,7 +1,7 @@
 import nltk
 from nltk.tokenize import word_tokenize # To add variety to responses
 import re # shunting-yard algorithm
-
+import pandas as pd
 
 knowledge_base = {
     "greetings": [

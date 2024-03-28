@@ -4,6 +4,8 @@ from nltk.tokenize import word_tokenize # To add variety to responses
 import knowledge_base 
 import re
 import country
+import pandas as pd
+
 
 def greet_user():
     greetings = knowledge_base.get("greetings", ["Hello!"])  # Fetch greetings from knowledge base
@@ -17,16 +19,12 @@ def greet_user():
 
 
 
-
 def handle_user_input(user_input):
    
     # Preprocess user input (lowercase, remove punctuation, etc.)
     processed_input = word_tokenize(user_input.lower())
 
-    
-
-          # Default if no match found
-
+    # Default if no match found
 
     # Favorite Color Question (Should be checked first)
     if re.search(r'\b(favorite\s+color)\b', user_input.lower()):  
@@ -71,8 +69,7 @@ def handle_user_input(user_input):
             return "I couldn't find states for {}".format(country_name)
 
     
-
-
+    
     # General Knowledge Patterns
     if re.search(r'what\s+is\s+the\s+(.*)', user_input.lower()):  
         return random.choice(knowledge_base.get("general_questions")) 
