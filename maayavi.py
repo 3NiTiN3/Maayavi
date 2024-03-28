@@ -5,6 +5,8 @@ import knowledge_base
 import re
 import country
 import pandas as pd
+import sys
+sys.path.append('/path/to/maayavi.py')  # Replace '/path/to' with the actual path
 
 
 def greet_user():
