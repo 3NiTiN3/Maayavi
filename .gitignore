@@ -10,3 +10,15 @@ Cargo.toml
 # Other potential exclusions
 
 .vscode/ # If you're using VS Code
+
+# Dynamic Libraries
+*.dylib
+*.so
+
+
+# Large JSON Files
+cities.json  
+
+
+# Potentially Ignore Entire Directories 
+Maayavi-vsC/lib/python3.12/site-packages/  # Exercise caution!
