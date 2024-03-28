@@ -3,9 +3,10 @@ __pycache__/
 Maayavi-vsC/   # Or the name of your specific virtual environment folder 
 
 # Build artifacts
-target/
+/target/
 src/
-
+Cargo.lock
+Cargo.toml
 # Other potential exclusions
 
 .vscode/ # If you're using VS Code
