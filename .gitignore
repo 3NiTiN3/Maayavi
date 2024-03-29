@@ -1,6 +1,6 @@
 # Environment folders
 __pycache__/
-env/   # Or the name of your specific virtual environment folder 
+/env/   # Or the name of your specific virtual environment folder 
 
 # Build artifacts
 /target/
