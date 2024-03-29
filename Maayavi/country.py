@@ -3,9 +3,9 @@ import json
 
 def load_country_data():
     current_dir = os.path.dirname(__file__)  # Get the directory of the current script
-    countries_path = os.path.join(current_dir, 'countries.json')
-    states_path = os.path.join(current_dir, 'states.json')
-    cities_path = os.path.join(current_dir, 'cities.json')
+    countries_path = os.path.join(current_dir, 'data/countries.json')
+    states_path = os.path.join(current_dir, 'data/states.json')
+    cities_path = os.path.join(current_dir, 'data/cities.json')
 
     with open(countries_path, 'r') as f:
         countries_data = json.load(f)
