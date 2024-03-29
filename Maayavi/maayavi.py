@@ -87,3 +87,5 @@ if __name__ == "__main__":
         # Add a prompt for further questions
         if "Calculation request detected!" in response: 
             print("Maayavi: Would you like to make another calculation, or can I help with something else?")
+
+

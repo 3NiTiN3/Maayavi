@@ -1,0 +1,23 @@
+# Environment folders
+__pycache__/
+env/   # Or the name of your specific virtual environment folder 
+
+# Build artifacts
+/target/
+src/
+Cargo.lock
+Cargo.toml
+# Other potential exclusions
+
+.vscode/ # If you're using VS Code
+
+# Dynamic Libraries
+*.dylib
+*.so
+
+
+# Large JSON Files
+*.json  
+
+
+# Potentially Ignore Entire Directories 
