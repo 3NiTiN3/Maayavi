@@ -1,11 +1,17 @@
+import os
 import json
 
 def load_country_data():
-    with open('countries.json', 'r') as f:
+    current_dir = os.path.dirname(__file__)  # Get the directory of the current script
+    countries_path = os.path.join(current_dir, 'countries.json')
+    states_path = os.path.join(current_dir, 'states.json')
+    cities_path = os.path.join(current_dir, 'cities.json')
+
+    with open(countries_path, 'r') as f:
         countries_data = json.load(f)
-    with open('states.json', 'r') as f:
+    with open(states_path, 'r') as f:
         states_data = json.load(f)
-    with open('cities.json', 'r') as f:
+    with open(cities_path, 'r') as f:
         cities_data = json.load(f)
 
     countries = {}  # Nested structure

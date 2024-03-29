@@ -1,25 +1,14 @@
 import random 
 import nltk
 from nltk.tokenize import word_tokenize # To add variety to responses
-import knowledge_base 
-import re
 import country
+import re
+import knowledge_base
 import pandas as pd
 import sys
-sys.path.append('/path/to/maayavi.py')  # Replace '/path/to' with the actual path
-
-
-def greet_user():
-    greetings = knowledge_base.get("greetings", ["Hello!"])  # Fetch greetings from knowledge base
-    print(random.choice(greetings))  # Select a random greeting
-
-
-
 
 def greet_user():
     print("Hello! I'm Maayavi, your friendly intelligence. How can I help you?")
-
-
 
 def handle_user_input(user_input):
    
@@ -37,9 +26,6 @@ def handle_user_input(user_input):
         return random.choice(knowledge_base.get("small_talk"))
     # ... (Add the other small talk regex patterns here) ...
 
-
-   
- 
     # Detect Calculation Requests (Example)
     calc_keywords = ["calculate", "add", "subtract", "multiply", "divide", "solve"]  # Expanded keywords
     if any(word in word_tokenize(user_input.lower()) for word in calc_keywords):
@@ -60,7 +46,6 @@ def handle_user_input(user_input):
         else:
             return "I don't have information about the capital of {}.".format(country_name)
 
-
     # Questions about states
     if re.search(r'what\s+are\s+the\s+states\s+in\s+(.*)', user_input.lower()):
         country_name = re.search(r'what\s+are\s+the\s+states\s+in\s+(.*)', user_input.lower()).group(1) 
@@ -70,8 +55,6 @@ def handle_user_input(user_input):
         else:
             return "I couldn't find states for {}".format(country_name)
 
-    
-    
     # General Knowledge Patterns
     if re.search(r'what\s+the\s+(.*)', user_input.lower()):  
         return random.choice(knowledge_base.get("general_questions")) 
@@ -79,12 +62,6 @@ def handle_user_input(user_input):
 
     else:
         return "I'm still learning, but I don't quite understand that yet."
-
-
-
-
-
-
 
 # Get user input and handle it
 user_input = input("You: ")
@@ -94,7 +71,6 @@ print("Maayavi:", response)
 # Very basic start for now!
 if __name__ == "__main__":
     greet_user()
-
 
     # Create a loop for continuous interaction:
     while True: 

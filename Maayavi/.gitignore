@@ -1,6 +1,6 @@
 # Environment folders
 __pycache__/
-Maayavi-vsC/   # Or the name of your specific virtual environment folder 
+env/   # Or the name of your specific virtual environment folder 
 
 # Build artifacts
 /target/
@@ -17,7 +17,7 @@ Cargo.toml
 
 
 # Large JSON Files
-cities.json  
+*.json  
 
 
 # Potentially Ignore Entire Directories 
