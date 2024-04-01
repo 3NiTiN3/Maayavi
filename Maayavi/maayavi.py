@@ -3,7 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 import country  # Ensure this module is implemented properly
 import re
-import knowledge_base  # Make sure this file exists with proper data structure
+from knowledge_base import get_response # Make sure this file exists with proper data structure
 from shunting import shunting_yard, evaluate_postfix
 
 def greet_user():
@@ -45,32 +45,37 @@ def handle_country_queries(processed_input, user_input):
                 return f"I couldn't find the country for {city_name}."
 
     # List Cities in a Given State
-    if 'cities in' in user_input:
-        match = re.search(r'cities in\s+([^\s]+)', user_input)
-        if match:
-            state_name = match.group(1).strip()
-            # Assuming you have a function to find the country name for the state
-            country_name = country.find_country_by_state(state_name)  
-            if country_name:
-                cities = country.get_cities(state_name, country_name)
-                if cities:
-                    return f"The cities in {state_name}, {country_name} are: {', '.join(cities)}"
-                else:
-                    return f"I couldn't find cities for {state_name} in {country_name}."
-            else:
-                return f"I couldn't determine the country for the state {state_name}."
+    # Handling 'cities in [country]'
+    match = re.search(r'cities in ([\w\s]+)', user_input, re.IGNORECASE)
+    if match:
+        country_name = match.group(1).strip().lower()
+        cities = country.get_cities_in_country(country_name)
+        if cities:
+            return f"The cities in {country_name.capitalize()} are: {', '.join(cities)}"
+        else:
+            return f"I couldn't find cities for {country_name.capitalize()}."
 
+    # Handling 'cities of [country]'
+    match = re.search(r'cities of ([\w\s]+)', user_input, re.IGNORECASE)
+    if match:
+        country_name = match.group(1).strip().lower()
+        # Convert country name to proper title case for display and matching
+        country_name_title = country_name.title()
+        cities = country.get_cities_in_country(country_name_title)
+        if cities:
+            return f"The cities in {country_name_title} are: {', '.join(cities)}"
+        else:
+            return f"I couldn't find cities for {country_name_title}."
 
-    # List Cities in a Given Country
-    if 'cities of' in user_input:
-        match = re.search(r'cities of\s+([^\s]+)', user_input)
-        if match:
-            country_name = match.group(1)
-            cities = country.get_cities_in_country(country_name)
-            if cities:
-                return f"The cities in {country_name} are: {', '.join(cities)}"
-            else:
-                return f"I couldn't find cities for {country_name}."
+    # Handling 'states in [country]'
+    match = re.search(r'states in ([\w\s]+)', user_input, re.IGNORECASE)
+    if match:
+        country_name = match.group(1).strip().lower()
+        states = country.get_states(country_name)
+        if states:
+            return f"The states in {country_name.capitalize()} are: {', '.join(states)}"
+        else:
+            return f"I couldn't find states for {country_name.capitalize()}."
 
 
     # Find the State for a Given City
@@ -111,7 +116,13 @@ def attempt_calculation(user_input, processed_input):
 
 def handle_user_input(user_input):
     processed_input = preprocess_input(user_input)
+    
+    # Check the knowledge base first for a direct response
+    direct_response = get_response(' '.join(processed_input))
+    if direct_response:
+        return direct_response
 
+    # If not found, proceed with other processing
     response = handle_country_queries(processed_input, user_input) or \
                handle_small_talk(processed_input) or \
                handle_general_knowledge(processed_input) or \
