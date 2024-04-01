@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maayavi</title>
+    <!-- Use relative paths for Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="chat-container">
+        
+        <header class="chat-header"><label for="training-mode">Training</label>
+            <input type="checkbox" id="trainingMode" name="training-mode">
+            <h1>Maayavi</h1>
+        </header>
+
+        
+
+        <div id="chatbox" class="chat-box"></div>
+        <form id="messageForm" class="chat-form">
+            <input type="text" id="messageInput" class="chat-input" placeholder="Enter a prompt here">
+
+            <button type="submit" class="chat-submit">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" id="share">
+        <!-- Elements with unique IDs or classes for JavaScript targeting -->
+        <path id="path1" fill="#6bee49" fill-rule="evenodd" d="M27.2635 28.794C27.2635 30.4509 25.9203 31.794 24.2635 31.794C22.6066 31.794 21.2635 30.4509 21.2635 28.794V17.0146C21.2635 16.9255 21.1557 16.8809 21.0927 16.9439L18.364 19.6727C17.1924 20.8443 15.2929 20.8443 14.1213 19.6727C12.9497 18.5011 12.9497 16.6016 14.1213 15.43L23.2194 6.33194C23.4665 6.08488 23.7992 5.97573 24.122 6.00449C24.1285 6.00507 24.135 6.00507 24.1415 6.00449C24.4642 5.97573 24.797 6.08488 25.044 6.33194L34.1421 15.43C35.3137 16.6016 35.3137 18.5011 34.1421 19.6727C32.9706 20.8443 31.0711 20.8443 29.8995 19.6727L27.4342 17.2074C27.3712 17.1444 27.2635 17.189 27.2635 17.2781V28.794Z"></path>
+        <path id="path2" fill="#9ffd87" fill-rule="evenodd" d="M9 32C9 30.3431 10.3431 29 12 29C13.6569 29 15 30.3431 15 32V35C15 35.5523 15.4477 36 16 36L32 36C32.5523 36 33 35.5523 33 35V32C33 30.3431 34.3431 29 36 29C37.6569 29 39 30.3431 39 32V39.6577C39 40.9513 37.9513 42 36.6577 42L36 42L35.3423 42H12.6577H12H11.3423C10.0487 42 9 40.9513 9 39.6577V32Z"></path>
+    </svg>
+                
+            </button>
+        </form>
+               
+    </div>
+    <!-- Use relative paths for Flask -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
