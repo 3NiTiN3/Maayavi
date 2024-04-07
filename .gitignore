@@ -1,7 +1,7 @@
 # Environment folders
 __pycache__/
-/env/   # Or the name of your specific virtual environment folder 
-
+/env/
+/gpt2-finetuned/
 # Build artifacts
 /target/
 src/
@@ -14,10 +14,12 @@ Cargo.toml
 # Dynamic Libraries
 *.dylib
 *.so
-
-
+cached_lm_GPT2Tokenizer_128_test.txt
+*.txt
 # Large JSON Files
 *.json  
-
+cached_lm_GPT2Tokenizer_128_test.txt.lock
 
 # Potentially Ignore Entire Directories 
+/env/lib/
+env/

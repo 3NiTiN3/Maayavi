@@ -5,12 +5,28 @@ import country  # Ensure this module is implemented properly
 import re
 from knowledge_base import get_response # Make sure this file exists with proper data structure
 from shunting import shunting_yard, evaluate_postfix
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
 
 def greet_user():
     print("Hello! I'm Maayavi, your friendly intelligence. How can I help you?")
 
+def initialize_gpt2():
+    global tokenizer, model
+    tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+    model = GPT2LMHeadModel.from_pretrained('gpt2')
+
+
 def preprocess_input(user_input):
     return word_tokenize(user_input.lower())
+
+def generate_response_with_gpt2(user_input):
+    input_ids = tokenizer.encode(user_input, return_tensors='pt')
+    output = model.generate(input_ids, max_length=50, num_return_sequences=1)
+    generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+    return generated_text
+
+
 
 def handle_country_queries(processed_input, user_input):
     # Handle query for capital
@@ -129,6 +145,9 @@ def handle_user_input(user_input):
                attempt_calculation(user_input, processed_input)
 
     return response if response else "I'm still learning, but I don't quite understand that yet."
+
+    if not response:
+        response = generate_response_with_gpt2(user_input)
 
 if __name__ == "__main__":
     greet_user()

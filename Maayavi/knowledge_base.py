@@ -1,4 +1,5 @@
 import json
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 # knowledge_base.py
 
 knowledge_base = {
